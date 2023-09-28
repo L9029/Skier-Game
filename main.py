@@ -34,5 +34,20 @@ def main():
     score = 0
     speed = [0, 6]
     
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            
+            #Settings of moving of the player
+            if event.type == pygame.KEYDOWN:
+                #Moving left
+                if event.ket == pygame.K_LEFT or event.type == pygame.K_a:
+                    skier.turn(-1)
+                #Moving right
+                if event.ket == pygame.K_RIGHT or event.type == pygame.K_d:
+                    skier.turn(1)
+    
 if __name__ == "__main__":
     main()
