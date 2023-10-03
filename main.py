@@ -1,7 +1,7 @@
 from Classes import *
 from func import *
 from Config import *
-import pygame, sys, random
+import pygame, sys
 
 def main():
     #Initilization of pygame methods
@@ -71,6 +71,25 @@ def main():
         
         for obstacle in obstacles:
             obstacle.move(distance)
+            
+        #Collision between skier and obstacles.
+        hitted_obstacles = pygame.sprite.spritecollide(skier, obstacles, False)
+        
+        #The collision between the skier and the trees.
+        if hitted_obstacles:
+            if hitted_obstacles[0].attribute == "tree" and not hitted_obstacles[0].passed:
+                score -= 50
+                skier.setFall()
+                updateFrame(screen, obstacles, skier, score)
+                pygame.time.delay(1000)
+                skier.setForward()
+                speed = [0, 6]
+                hitted_obstacles[0].passed = True
+            
+            #When the skier collide with the flags
+            elif hitted_obstacles[0].attribute == "flag" and not hitted_obstacles[0].passed:
+                score += 30
+                obstacles.remove(hitted_obstacles[0]) #This remove the flag when collide with the skier.
         
         updateFrame(screen, obstacles, skier, score)
     
