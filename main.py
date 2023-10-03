@@ -1,7 +1,7 @@
 from Classes import *
 from func import *
 from Config import *
-import pygame, sys
+import pygame, sys, random
 
 def main():
     #Initilization of pygame methods
@@ -43,11 +43,39 @@ def main():
             #Settings of moving of the player
             if event.type == pygame.KEYDOWN:
                 #Moving left
-                if event.ket == pygame.K_LEFT or event.type == pygame.K_a:
-                    skier.turn(-1)
+                if event.key == pygame.K_LEFT or event.type == pygame.K_a:
+                    speed = skier.turn(-1)
                 #Moving right
-                if event.ket == pygame.K_RIGHT or event.type == pygame.K_d:
-                    skier.turn(1)
+                if event.key == pygame.K_RIGHT or event.type == pygame.K_d:
+                    speed = skier.turn(1)
+        
+        #Updating the obstacle and skier position
+        skier.move()
+        
+        distance += speed[1]
+        
+        if distance >= 640 and obstaclesFlag == 0:
+            obstaclesFlag = 1
+            obstacles0 = createObstacles(20, 29)
+            obstacles = addObstacles(obstacles0, obstacles1)
+        
+        if distance >= 1280 and obstaclesFlag == 1:
+            obstaclesFlag = 0
+            distance -= 1280
+            
+            for obstacle in obstacles0:
+                obstacle.location[1] = obstacle.location[1] - 1280
+            
+            obstacles1 = createObstacles(10, 19)
+            obstacles = addObstacles(obstacles0, obstacles1)
+        
+        for obstacle in obstacles:
+            obstacle.move(distance)
+        
+        updateFrame(screen, obstacles, skier, score)
+    
+        pygame.display.update()
+        clock.tick(cfg.FPS)
     
 if __name__ == "__main__":
     main()

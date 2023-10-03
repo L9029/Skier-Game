@@ -1,5 +1,5 @@
 from Config import cfg
-from Classes import ObstacleClass
+from Classes import *
 import random, pygame
 
 def createObstacles(s, e, num=10):
@@ -15,7 +15,7 @@ def createObstacles(s, e, num=10):
             locations.append(location)
             attribute = random.choice(list(cfg.OBSTACLE_PATH.keys()))
             image_path = cfg.OBSTACLE_PATH[attribute]
-            obstacle = ObstacleClass(image_path, location, attribute)
+            obstacle = Obstacle(image_path, location, attribute)
             obstacles.add(obstacle)
     
     return obstacles

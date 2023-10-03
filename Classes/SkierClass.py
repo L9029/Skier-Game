@@ -32,7 +32,7 @@ class Skier(pygame.sprite.Sprite):
     def move(self):
         self.rect.centerx += self.speed[0]
         self.rect.centerx = max(20, self.rect.centerx)
-        self.rect.centerx = max(620, self.rect.centerx)
+        self.rect.centerx = min(620, self.rect.centerx)
 
     def setFall(self):
         self.image = pygame.image.load(cfg.SKIER_IMAGE_PATH[-1])

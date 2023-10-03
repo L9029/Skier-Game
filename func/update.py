@@ -1,5 +1,4 @@
-from Config import cfg
-from Classes import SkierClass, ObstacleClass
+from Classes import *
 import pygame
 from .score import *
 
