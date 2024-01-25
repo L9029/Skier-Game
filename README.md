@@ -2,11 +2,7 @@
 
 This is a simple python game made with pygame.
 
-<img src="/resources/images/skier_fall.png" width="240" height="160" alignt="center"/>
-
-[TOCM]
-
-[TOC]
+<img src="/resources/images/skier_fall.png" width="340" height="250"/>
 
 # How to play the game ?
 
